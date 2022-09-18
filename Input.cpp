@@ -18,11 +18,39 @@ std::ifstream Input::read() {
 	return df;
 }
 void Input::showRows() {
-	string singleRow;
 	for (auto &singleRow : rows) {
 		cout << singleRow << endl;
 	}
 }
+
+int Input::countRowWords() {
+	stringstream ss;
+	string word = "";
+	int count;
+	for (auto& singleRow : rows) {
+		ss.clear();
+		ss.str("");
+		ss << singleRow;
+		count = 0;
+		while (!ss.eof()) {
+			ss >> word;
+			//cout << word;
+			count++;
+		}
+		singleRowWordCount.push_back(count);
+		//cout << count;
+		//cout << "\n";
+	}
+	return 0;
+}
+
+void Input::showWordsCount() {
+	for (auto& cnt : singleRowWordCount) {
+		cout << cnt << endl;
+	}
+}
+
 Input::~Input() {
 	rows.clear();
+	singleRowWordCount.clear();
 }

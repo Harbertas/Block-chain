@@ -23,18 +23,20 @@ void decToHex(int num) {
 
 int main()
 {
-    //cout << "Hello World!\n";
     Input duomenys;
+
     duomenys.read();
-    duomenys.showRows();
+    //duomenys.showRows();
+    duomenys.countRowWords();
+    //duomenys.showWordsCount();
     cout << duomenys.getTimeTaken() << " s\n";
 
-    char raide = 'a';
-    char raide1 = 'A';
-    cout << (int)raide;
-    cout << (int)raide1;
+    //char raide = 'a';
+    //char raide1 = 'A';
+    //cout << (int)raide;
+    //cout << (int)raide1;
 
-    decToHex(100);
+    //decToHex(100);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
