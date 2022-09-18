@@ -3,20 +3,28 @@
 class Input //class used for storing input data from a file
 {
 	private:
-		vector<string> rows; //vector to store read data by rows
-		vector<int> singleRowWordCount; //vector to store count of each row's words
-		double timeTaken; // variable to save time taken to read file data
+		string row; //string to store read row
+		string hashedRow; // string to store hashed row value
+		int wordCount = 0; // integer to save row's word count
+		vector<string> words; // vector type string to save row's words
+		vector<string> hashedWords; //vector type string to save hashed words
 	public:
-		inline double getTimeTaken() const { return timeTaken; }; //getter
-		inline double setTimeTaken(double time) { this->timeTaken = time; return this->timeTaken; }; //setter
-		
-		std::ifstream read(); //function to read data from a file
-		void showRows(); //function to show read data
+		std::ifstream read(vector<Input>&, double&); //function to read data from a file
 
-		int countRowWords(); //function to count how many words each row have
-		void showWordsCount(); //function to show each row's word count
+		inline void setRow(string r) { row = r; }; //setter
+		inline void setWords(string w) { words.push_back(w); wordCount = words.size(); }; //setter
+		inline void setHashedWords(string hw) { hashedWords.push_back(hw);}; //setter
+		inline void setHashedRow(string hw) { hashedRow = hw;}; //setter
 
+		inline string getRow() const { return row; }; //getter
+		inline string getWord(int& i) const { return words.at(i); }; //getter
+		inline string getHashedWord(int& i) const { return hashedWords.at(i); }; //getter
+		inline string getHashedRow() const { return hashedRow; }; //getter
+		inline int getWordCount() const { return wordCount; }; //getter
+		void hashRow(double&); //function to hashRow
 
-		~Input(); //destructor
+		~Input(); //destructor	
 };
+
+string decToHex(string); //function to convert word to hex value
 

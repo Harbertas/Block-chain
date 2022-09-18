@@ -1,56 +1,93 @@
 #include "Input.h"
 
-std::ifstream Input::read() {
+
+std::ifstream Input::read(vector<Input>& data, double& timeTaken)
+{
+	vector<string> rows;
 	string singleRow;
+
 	auto start = std::chrono::high_resolution_clock::now();
+
 	std::ifstream df("input.txt");
-	while (df) {
-		if (!df.eof()) {
+	while (df)
+	{
+		if (!df.eof())
+		{
 			std::getline(df, singleRow);
 			rows.push_back(singleRow);
 		}
 		else break;
 	}
 	df.close();
+
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start; // Skirtumas (s)
-	setTimeTaken(diff.count());
-	return df;
-}
-void Input::showRows() {
-	for (auto &singleRow : rows) {
-		cout << singleRow << endl;
-	}
-}
 
-int Input::countRowWords() {
+	timeTaken = diff.count();
+
+	Input temp;
 	stringstream ss;
-	string word = "";
-	int count;
-	for (auto& singleRow : rows) {
+	string word;
+	for (auto& singleRow : rows) 
+	{
 		ss.clear();
 		ss.str("");
 		ss << singleRow;
-		count = 0;
+		temp.setRow(singleRow);
 		while (!ss.eof()) {
 			ss >> word;
-			//cout << word;
-			count++;
+			temp.setWords(word);
 		}
-		singleRowWordCount.push_back(count);
-		//cout << count;
-		//cout << "\n";
+		data.push_back(temp);
+		temp.words.clear();
 	}
-	return 0;
-}
-
-void Input::showWordsCount() {
-	for (auto& cnt : singleRowWordCount) {
-		cout << cnt << endl;
-	}
-}
-
-Input::~Input() {
 	rows.clear();
-	singleRowWordCount.clear();
+	return df;
+}
+
+Input::~Input()
+{
+	words.clear();
+	hashedWords.clear();
+}
+
+string decToHex(string word)
+{
+	int dec_num, r;
+	string hexdec_num = "";
+	for (auto it = word.end()-1; it >= word.begin(); it--) 
+	{
+		dec_num = (((int)*it)^8);
+		char hex[] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
+		while (dec_num > 0)
+		{
+			r = dec_num % 16;
+			hexdec_num = hex[r] + hexdec_num;
+			dec_num = dec_num / 16;
+		}
+	}
+	return hexdec_num;
+}
+
+void Input::hashRow(double& timeTakenToConvert) {
+	auto start = std::chrono::high_resolution_clock::now();
+	for (auto& w : words)
+	{
+		//cout << w << endl;
+		//cout << decToHex(w) << endl;
+		setHashedWords(decToHex(w));
+	}
+	while (hashedRow.length() < 65) 
+	{	
+		for (auto& el : hashedWords) 
+		{
+			hashedRow += el;
+		}
+	}
+	hashedRow.resize(64);
+	setHashedRow(hashedRow);
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> diff = end - start; // Skirtumas (s)
+
+	timeTakenToConvert += diff.count();
 }
