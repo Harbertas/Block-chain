@@ -39,7 +39,9 @@
 2. 3df1022f5021bb01d7001e0d021bb03c1a020810211e01e0d01f4703d5403c1a<br>
 3. 2147e24ad4428fc26b6e260902147e26b6e26b6e209a0428fc2147e23ff624ad<br>
 
-- single symbol / character
+<hr>
+
+- single symbol / character gives you this
 
 ### input:
 
