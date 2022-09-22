@@ -10,18 +10,37 @@ int main()
     vector<Input> duomenys;
     duomenys[0].read(duomenys, timeTakenToRead);
     cout << "Time taken to read: " << timeTakenToRead << " s" << endl;
-    for (auto& inst : duomenys) 
+    //cout << duomenys.size() << endl;
+    int i = 0;
+    for (auto& inst : duomenys)
     {
         inst.hashRow(timeTakenToConvert);
-        cout << inst.getHashedRow() << endl;
+        //cout << inst.getHashedRow() << endl;
+        //cout << i << " " << inst.getHashedRow() << endl;
+        i++;
     }
     cout << "Time taken to convert: " << timeTakenToConvert << " s" << endl;
-   /* for (auto& data : duomenys) 
+
+    for (int j = 0; j < duomenys.size(); j++) 
     {
-        cout << data.getRow() << endl;
-        for(int i = 0; i < data.getWordCount(); i++)
-        cout << data.getWord(i) << endl;
-    }*/
+        for (int i = j+1; i < duomenys.size(); i++)
+        {
+            if (duomenys[j].getHashedRow() == duomenys[i].getHashedRow() && duomenys[j].getRow() != duomenys[i].getRow())
+            {
+                cout << j << " " << duomenys[j].getHashedRow() << "\n" << i << " " << duomenys[i].getHashedRow() << endl;
+                cout << j << " " << duomenys[j].getRow() << "\n" << i << " " << duomenys[i].getRow() << endl;
+            }
+        }
+    }
+    //cout << duomenys[0].getHashedRow() << endl;
+    //for (auto& data : duomenys)
+    //{
+    //    cout << data.getRow() << endl;
+    //    cout << data.getHashedRow() << endl;
+    //    for(int i = 0; i < data.getWordCount(); i++)
+    //    cout << data.getWord(i) << " ";
+    //    cout << endl;
+    //}
 
     //for (auto& inst : duomenys) {
     //    for (int i = 0; i < inst.getWordCount(); i++) {

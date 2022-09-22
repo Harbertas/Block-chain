@@ -14,7 +14,7 @@ class Input //class used for storing input data from a file
 		inline void setRow(string r) { row = r; }; //setter
 		inline void setWords(string w) { words.push_back(w); wordCount = words.size(); }; //setter
 		inline void setHashedWords(string hw) { hashedWords.push_back(hw);}; //setter
-		inline void setHashedRow(string hw) { hashedRow = hw;}; //setter
+		inline void setHashedRow(string hw) { hashedRow = hw; }; //setter
 
 		inline string getRow() const { return row; }; //getter
 		inline string getWord(int& i) const { return words.at(i); }; //getter
@@ -22,9 +22,9 @@ class Input //class used for storing input data from a file
 		inline string getHashedRow() const { return hashedRow; }; //getter
 		inline int getWordCount() const { return wordCount; }; //getter
 		void hashRow(double&); //function to hashRow
+		string decToHex(string);
 
 		~Input(); //destructor	
 };
 
-string decToHex(string); //function to convert word to hex value
 
