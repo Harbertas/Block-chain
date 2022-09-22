@@ -1,5 +1,9 @@
 #include "Input.h"
 
+bool is_empty(std::ifstream& df)
+{
+    return df.peek() == std::ifstream::traits_type::eof();
+}
 
 std::ifstream Input::read(vector<Input>& data, double& timeTaken)
 {
@@ -9,6 +13,23 @@ std::ifstream Input::read(vector<Input>& data, double& timeTaken)
     auto start = std::chrono::high_resolution_clock::now();
 
     std::ifstream df("input.txt");
+    try
+    {
+        if (!df)
+            throw 1;
+        if(is_empty(df))
+            throw 2;
+
+    }
+    catch(int x) {
+        if (x == 1) {
+            cout << "File does not exist!" << endl; exit(0);
+        }
+        else if (x == 2) {
+            cout << "File is empty!" << endl; exit(0);
+        }
+    }
+  
     while (df)
     {
         if (!df.eof())
@@ -59,7 +80,7 @@ Input::~Input()
     hashedWords.clear();
 }
 
-string Input::decToHex(string word)
+string Input::decToHex(string row)
 {
     int dec_num, r;
     string hexdec_num = "";
@@ -67,16 +88,16 @@ string Input::decToHex(string word)
     cout << "galas " << *(word.end()-1) << endl;*/
     //cout << word << endl;
     int sum = 0;
-    for (auto it = word.end() - 1; it >= word.begin(); it--)
+    for (auto it = row.end() - 1; it >= row.begin(); it--)
     {
         sum += (int)*it;
     }
-    for (auto it = word.end() - 1; it >= word.begin(); it--)
+    for (auto it = row.end() - 1; it >= row.begin(); it--)
     {
         //cout << "pradzia " << *word.begin() << endl;
         //cout << "galas " << *(word.end()-1) << endl;
         //cout << "itterator " << *it << endl;
-        dec_num = ((int)*it) * sum * words.size();
+        dec_num = ((int)*it) * sum^2 * words.size()^4;
         char hex[] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
         while (dec_num > 0)
         {
@@ -94,13 +115,9 @@ string Input::decToHex(string word)
 
 void Input::hashRow(double& timeTakenToConvert) {
     auto start = std::chrono::high_resolution_clock::now();
-    for (auto& w : words)
-    {
         //cout << w << endl;
         //cout << decToHex(w) << endl;
-        setHashedWords(decToHex(w));
-        hashedRow += decToHex(w);
-    }
+        hashedRow = decToHex(getRow());
     while (true) {
         if (hashedRow.length() < 64) {
             setHashedRow(decToHex(getHashedRow()));

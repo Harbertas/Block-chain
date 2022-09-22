@@ -15,8 +15,7 @@ int main()
     for (auto& inst : duomenys)
     {
         inst.hashRow(timeTakenToConvert);
-        //cout << inst.getHashedRow() << endl;
-        //cout << i << " " << inst.getHashedRow() << endl;
+        cout << i << " " << inst.getHashedRow() << endl;
         i++;
     }
     cout << "Time taken to convert: " << timeTakenToConvert << " s" << endl;
