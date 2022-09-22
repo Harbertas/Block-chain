@@ -2,7 +2,7 @@
 
 ## Achieved things:
 
-- If row is long and you change **a symbol / few symbols**, it rewards you with an avalanche effect **(simply -> SIMPLY)**<br>
+- If row is long and you change **a symbol / few symbols**, it rewards you with an avalanche effect <br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
 
     ### Input:
     
