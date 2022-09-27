@@ -1,5 +1,9 @@
 # A github repository for the Block-chain course
 
+## Efficiency analysis
+
+- Time taken to hash [konstitucija.txt](https://www.dropbox.com/s/ce83ry9a4d9642z/konstitucija.txt?dl=0) (789 rows) : 0.033748 s.
+
 ## Achieved things:
 
 - If row is long and you change **a symbol / few symbols**, it rewards you with an avalanche effect <br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
@@ -70,12 +74,12 @@
     467ac4485941e954bb344c5a54d016486ff4b0c36d61460e826e56e6b7607042
     467ac4485941e954bb344c5a54d016486ff4b0c36d61460e826e56e6b7607042
     ```
-    
+
 ## To Do:
 
 - ~~Create an **Input class.**~~
 - ~~Implement reading from a file.~~
 - ~~Function to convert **decimal** values into **Hexadecimal** values.~~
 - ~~Convert each row's text symbol into **ASCII** value.~~
-- ...
-- **Improve/upgrade** hash function.
+- ~~...~~
+- ~~**Improve/upgrade** hash function.~~
