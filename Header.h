@@ -10,6 +10,8 @@
 #include <fstream>
 #include <chrono>
 #include <sstream>
+#include <filesystem>
+#include <random>
 
 using std::cout;
 using std::cin;

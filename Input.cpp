@@ -5,14 +5,96 @@ bool is_empty(std::ifstream& df)
     return df.peek() == std::ifstream::traits_type::eof();
 }
 
+void generate(int size, int length) {
+    using hrClock = std::chrono::high_resolution_clock;
+    std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> numb(48, 126);
+
+    stringstream buffer;
+
+    string fileName = to_string(size);
+    fileName += "_" + to_string(length) + ".txt";
+    std::ofstream rf(fileName);
+
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            buffer << (char)numb(mt);
+        }
+        if (i < size - 1)
+            buffer << "\n";
+    }
+
+    rf << buffer.str();
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start; // Skirtumas (s)
+    std::cout << size << " row size generation time " << diff.count() << " s\n";
+
+    buffer.str("");
+    buffer.clear();
+    rf.close();
+}
+
+void generate(int size) {
+    using hrClock = std::chrono::high_resolution_clock;
+    std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> numb(48, 126);
+    std::uniform_int_distribution<int> rnd(2, 1000);
+
+    stringstream buffer;
+
+    string fileName = to_string(size);
+    fileName += ".txt";
+    std::ofstream rf(fileName);
+
+    auto start = std::chrono::high_resolution_clock::now();
+    int length;
+    string smth;
+    for (int i = 0; i < size; i++)
+    {
+        length = rnd(mt);
+        smth.clear();
+        for (int j = 0; j < length; j++)
+        {
+            smth += (char)numb(mt);
+        }
+        buffer << smth;
+        if (i < size - 1)
+            buffer << "\n";
+        std::uniform_int_distribution<int> change(0, length-1);
+        smth.at(change(mt)) = (char)numb(mt);
+        buffer << smth;
+        i++;
+        if (i < size - 1)
+            buffer << "\n";
+    }
+
+    rf << buffer.str();
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start; // Skirtumas (s)
+    std::cout << size << " row size generation time " << diff.count() << " s\n";
+
+    buffer.str("");
+    buffer.clear();
+    rf.close();
+}
+
 std::ifstream Input::read(vector<Input>& data, double& timeTaken)
 {
     vector<string> rows;
     string singleRow;
 
-    auto start = std::chrono::high_resolution_clock::now();
+    string inp;
+    cout << "Write file name (without .txt extension):" << endl;
+    cin.ignore();
+    getline(cin, inp);
+    inp = inp + ".txt";
+    std::ifstream df(inp);
 
-    std::ifstream df("input.txt");
     try
     {
         if (!df)
@@ -23,13 +105,13 @@ std::ifstream Input::read(vector<Input>& data, double& timeTaken)
     }
     catch(int x) {
         if (x == 1) {
-            cout << "File does not exist!" << endl; exit(0);
+            cout << "File '" << inp << "' does not exist!" << endl; exit(0);
         }
         else if (x == 2) {
             cout << "File is empty!" << endl; exit(0);
         }
     }
-  
+    auto start = std::chrono::high_resolution_clock::now();
     while (df)
     {
         if (!df.eof())
@@ -39,10 +121,6 @@ std::ifstream Input::read(vector<Input>& data, double& timeTaken)
         }
         else break;
     }
-    //for (auto& str : rows) 
-    //{
-    //  cout << str << endl;
-    //}
     df.close();
 
     auto end = std::chrono::high_resolution_clock::now();
