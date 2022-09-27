@@ -32,9 +32,9 @@
      ### Output:
      
      ```console
-     1e44220bca3e62a1f8061da601e44222970233523f00c215ac1e442201e82335
-     3df1022f5021bb01d7001e0d021bb03c1a020810211e01e0d01f4703d5403c1a
-     2147e24ad4428fc26b6e260902147e26b6e26b6e209a0428fc2147e23ff624ad
+     1e2bc20a243e3041f668213fa1e2bc227b62318c3ecda1d8e61e2bc2004e2318
+     3dbee22d8e219fe210361df4e219fe3be962066e1d5861df4e1f2de3d2263be9
+     1faa122e5c3f54824d59414551faa124d5924d591f056409fa1faa12240522e5
      ```
 
 - **Single symbol / character** gives you this
@@ -49,8 +49,8 @@
     ### Output:
 
     ```console
-    e64cd8c01c390ead0e64ce1c81bf0cfce0f3d8d8c01b6041c814e1c81cc981c3
-    e2f4102bae77ef51ce2f41bcd41b84a1cefce2f41ca72e2f4fe30e2f41b84a1c
+    a3f3a0b89a56ad9ca3f3a72a9a56ad9cad9ca3f39a56ad9ca3f3b0d79a56ad9c
+    d9fef4261b3f6e2b6d9fe1ab3ee2b6de52d9fe1b3f61ab3e1b84ad9fef4261b3
     ```
 
 ## ~~Problems:~~
