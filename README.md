@@ -2,11 +2,28 @@
 
 ## Efficiency analysis
 
-- Time taken to hash [konstitucija.txt](https://www.dropbox.com/s/ce83ry9a4d9642z/konstitucija.txt?dl=0) (789 rows) : 0.033748 s.
+- Time taken to hash [konstitucija.txt](https://www.dropbox.com/s/ce83ry9a4d9642z/konstitucija.txt?dl=0) (789 rows) : 0.033748s.
+- After hashing 25 000 rows, which length were 10, 100, 500, 1 000 random symbols, no hashed rows were the same, thus I can say that the hash function is resistant to collision.
+
+- To hash 100 000 rows, which each length varies from 2 to 1 000 symbols, it took **25.3471s**.<br> **Minimum, Average, Maximum** HEXADECIMAL similarities were:
+
+    ```console
+    minimum similarity: 0%
+    average similarity: 41.3263%
+    maximum similarity: 71.875%
+    ```
+    **Minimum, Average, Maximum** BINARY similarities were:
+    
+    ```console
+    minimum similarity: 39.8438%
+    average similarity: 70.5024%
+    maximum similarity: 89.0625%
+    ```
+    Thus hash is not the best (weak avalanche effect). 
 
 ## Achieved things:
 
-- If row is long and you change **a symbol / few symbols**, it rewards you with an avalanche effect <br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
+- If row is long and you change **a symbol / few symbols**, it gives you this <br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
 
     ### Input:
     
@@ -23,7 +40,7 @@
     7de8eab7e48abcdf2aa755cab494ca35056a78f04ab98f6abe870ac1d7cab494
     ```
 
-- If row is **short and you change a symbol**, it rewards you with an avalanche effect<br>
+- If row is **short and you change a symbol**, it gives you this<br>
 
      ### Input:
 
