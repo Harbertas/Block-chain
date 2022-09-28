@@ -2,7 +2,7 @@
 
 ## Hash function pseudo code
 
-```console
+```c++
 decToHex(string):
 	for(it : string)
 		sum = sum + (int)it
