@@ -1,5 +1,31 @@
 # A github repository for the Block-chain course
 
+## Hash function pseudo code
+
+```console
+decToHex(string):
+	for(it : string)
+		sum = sum + (int)it
+	for(it : string)
+		dec_num = (int)it * sum^2 * string.size()^4
+		hex[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}
+		while(dec_num > 0)
+			r = dec_num % 16;
+			hexdec_num = hex[r] + hexdec_num
+			dec_num = dec_num / 16
+	return hexdec_num
+
+hashRow(string):
+	hashedRow = decToHex(string)
+	while(true)
+		if(hashedRow.length() < 64)
+			hashedRow = decToHex(hashedRow)
+		else
+			hashedRow.resize(64)
+			break;
+
+```
+
 ## Efficiency analysis
 
 - Time taken to hash [konstitucija.txt](https://www.dropbox.com/s/ce83ry9a4d9642z/konstitucija.txt?dl=0) (789 rows) : 0.033748s.
