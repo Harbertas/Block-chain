@@ -35,46 +35,53 @@ int main()
         vector<Input> duomenys;
         duomenys[0].read(duomenys, timeTakenToRead);
         cout << "Time taken to read: " << timeTakenToRead << " s" << endl;
-        //cout << duomenys.size() << endl;
-        int i = 0;
+        //int i = 0;
         for (auto& inst : duomenys)
         {
             inst.hashRow(timeTakenToConvert);
-            cout << i << " " << inst.getHashedRow() << endl;
-            i++;
+            //cout << i << " " << inst.getHashedRow() << endl;
+            //i++;
         }
         cout << "Time taken to convert: " << timeTakenToConvert << " s" << endl;
 
+        //checkCollision(duomenys);
 
-        for (int j = 0; j < duomenys.size(); j++)
-        {
-            for (int i = j + 1; i < duomenys.size(); i++)
-            {
-                if (duomenys[j].getHashedRow() == duomenys[i].getHashedRow() && duomenys[j].getRow() != duomenys[i].getRow())
-                {
-                    cout << j << " " << duomenys[j].getHashedRow() << "\n" << i << " " << duomenys[i].getHashedRow() << endl;
-                    cout << j << " " << duomenys[j].getRow() << "\n" << i << " " << duomenys[i].getRow() << endl;
-                }
-            }
+        //similarity HEX
+        vector<double> percent;
+        for (int i = 0; i < duomenys.size(); i++) {
+            percent.push_back(compare(duomenys.at(i).getHashedRow(), duomenys.at(i+1).getHashedRow()));
+            i++;
         }
+        sort(percent.begin(), percent.end());
+        double sum = 0;
+        for (auto& el : percent) {
+            sum += el;
+        }
+        cout << "HEXADECIMAL" << endl;
+        cout << "minimum similarity: " << percent.at(0) << "%" << endl;
+        cout << "average similarity: " << sum / percent.size() << "%" << endl;
+        cout << "maximum similarity: " << percent.at(percent.size() - 1) << "%" << endl;
+
+
+        //similarity BINARY
+        percent.clear();
+        for (int i = 0; i < duomenys.size(); i++) {
+            percent.push_back(compare(hexToBin(duomenys.at(i).getHashedRow()), hexToBin(duomenys.at(i+1).getHashedRow())));
+            i++;
+        }
+        sort(percent.begin(), percent.end());
+        sum = 0;
+        for (auto& el : percent) {
+            sum += el;
+        }
+        cout << "BINARY" << endl;
+        cout << "minimum similarity: " << percent.at(0) << "%" << endl;
+        cout << "average similarity: " << sum / percent.size() << "%" << endl;
+        cout << "maximum similarity: " << percent.at(percent.size() - 1) << "%" << endl;
+        hexToBin(duomenys.at(0).getHashedRow());
     }
     //generate(25000, 10);
-    //generate(10);
-    //cout << duomenys[0].getHashedRow() << endl;
-    //for (auto& data : duomenys)
-    //{
-    //    cout << data.getRow() << endl;
-    //    cout << data.getHashedRow() << endl;
-    //    for(int i = 0; i < data.getWordCount(); i++)
-    //    cout << data.getWord(i) << " ";
-    //    cout << endl;
-    //}
-
-    //for (auto& inst : duomenys) {
-    //    for (int i = 0; i < inst.getWordCount(); i++) {
-    //        cout << inst.getHashedWord(i) << endl;
-    //    }
-    //}
+    //generate(100000);
     return 0;
 }
 

@@ -9,6 +9,7 @@ class Input //class used for storing input data from a file
 		vector<string> hashedWords; //vector type string to save hashed words
 	public:
 		std::ifstream read(vector<Input>&, double&); //function to read data from a file
+		std::ifstream readFile(vector<Input>& data, double& timeTaken, string name);
 
 		inline void setRow(string r) { row = r; }; //setter
 		inline void setWords(string w) { words.push_back(w); }; //setter
@@ -21,6 +22,7 @@ class Input //class used for storing input data from a file
 		inline string getHashedRow() const { return hashedRow; }; //getter
 		inline int getWordCount() const { return words.size();; }; //getter
 		void hashRow(double&); //function to hashRow
+		void hashRow(string); //function to hashRow
 		string decToHex(string); //function to convert row symbols to ASCII
 
 		~Input(); //destructor	
@@ -28,4 +30,7 @@ class Input //class used for storing input data from a file
 
 void generate(int, int);
 void generate(int);
+double compare(string, string);
+void checkCollision(vector<Input>);
+string hexToBin(string hexdec);
 

@@ -5,6 +5,104 @@ bool is_empty(std::ifstream& df)
     return df.peek() == std::ifstream::traits_type::eof();
 }
 
+double compare(string first, string second)
+{
+    double percent;
+    int same = 0;
+    for (int i = 0; i < first.size(); i++)
+    {
+        if (first.at(i) == second.at(i))
+            same++;
+    }
+    percent = ((double)same / first.size()) * 100;
+    return percent;
+}
+
+void checkCollision(vector<Input>& d)
+{
+    //CHECK COLLISION
+    for (int j = 0; j < d.size(); j++)
+    {
+        for (int i = j + 1; i < d.size(); i++)
+        {
+            if (d[j].getHashedRow() == d[i].getHashedRow() && d[j].getRow() != d[i].getRow())
+            {
+                cout << j << " " << d[j].getHashedRow() << "\n" << i << " " << d[i].getHashedRow() << endl;
+                cout << j << " " << d[j].getRow() << "\n" << i << " " << d[i].getRow() << endl;
+            }
+        }
+    }
+}
+
+string hexToBin(string hexdec)
+{
+    long int i = 0;
+    string binary;
+    while (hexdec[i]) {
+
+        switch (hexdec[i]) {
+        case '0':
+            binary += "0000";
+            break;
+        case '1':
+            binary += "0001";
+            break;
+        case '2':
+            binary += "0010";
+            break;
+        case '3':
+            binary += "0011";
+            break;
+        case '4':
+            binary += "0100";
+            break;
+        case '5':
+            binary += "0101";
+            break;
+        case '6':
+            binary += "0110";
+            break;
+        case '7':
+            binary += "0111";
+            break;
+        case '8':
+            binary += "1000";
+            break;
+        case '9':
+            binary += "1001";
+            break;
+        case 'A':
+        case 'a':
+            binary += "1010";
+            break;
+        case 'B':
+        case 'b':
+            binary += "1011";
+            break;
+        case 'C':
+        case 'c':
+            binary += "1100";
+            break;
+        case 'D':
+        case 'd':
+            binary += "1101";
+            break;
+        case 'E':
+        case 'e':
+            binary += "1110";
+            break;
+        case 'F':
+        case 'f':
+            binary += "1111";
+            break;
+
+            //cout << "\nInvalid hexadecimal digit " << hexdec[i];
+        }
+        i++;
+    }
+    return binary;
+}
+
 void generate(int size, int length) {
     using hrClock = std::chrono::high_resolution_clock;
     std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
@@ -65,7 +163,7 @@ void generate(int size) {
         if (i < size - 1)
             buffer << "\n";
         std::uniform_int_distribution<int> change(0, length-1);
-        smth.at(change(mt)) = (char)numb(mt);
+        smth.at(change(mt)) = '/';
         buffer << smth;
         i++;
         if (i < size - 1)
@@ -81,6 +179,70 @@ void generate(int size) {
     buffer.str("");
     buffer.clear();
     rf.close();
+}
+
+std::ifstream Input::readFile(vector<Input>& data, double& timeTaken, string name)
+{
+    vector<string> rows;
+    string singleRow;
+
+    std::ifstream df(name);
+
+    try
+    {
+        if (!df)
+            throw 1;
+        if (is_empty(df))
+            throw 2;
+
+    }
+    catch (int x) {
+        if (x == 1) {
+            cout << "File '" << name << "' does not exist!" << endl; exit(0);
+        }
+        else if (x == 2) {
+            cout << "File is empty!" << endl; exit(0);
+        }
+    }
+    auto start = std::chrono::high_resolution_clock::now();
+    while (df)
+    {
+        if (!df.eof())
+        {
+            std::getline(df, singleRow);
+            rows.push_back(singleRow);
+        }
+        else break;
+    }
+    df.close();
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start; // Skirtumas (s)
+
+    timeTaken = diff.count();
+
+    Input temp;
+    stringstream ss;
+    string word;
+    //int i = 0;
+    for (auto& singleRow : rows)
+    {
+        //cout << "i " << i << endl;
+        //i = 0;
+        ss << singleRow;
+        temp.setRow(singleRow);
+        while (!ss.eof()) {
+            ss >> word;
+            //cout << word << endl;
+            temp.setWords(word);
+        }
+        data.push_back(temp);
+        ss.clear();
+        temp.words.clear();
+        //i++;
+    }
+    rows.clear();
+    return df;
 }
 
 std::ifstream Input::read(vector<Input>& data, double& timeTaken)
@@ -212,4 +374,19 @@ void Input::hashRow(double& timeTakenToConvert) {
     std::chrono::duration<double> diff = end - start; // Skirtumas (s)
 
     timeTakenToConvert += diff.count();
+}
+
+void Input::hashRow(string row) {
+    hashedRow = decToHex(row);
+    while (true) {
+        if (hashedRow.length() < 64) {
+            setHashedRow(decToHex(getHashedRow()));
+        }
+        else
+        {
+            hashedRow.resize(64);
+            setHashedRow(getHashedRow());
+            break;
+        }
+    }
 }
