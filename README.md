@@ -47,7 +47,7 @@ hashRow(string):
     ```
     Thus hash is not the best (weak avalanche effect). 
 
-## Achieved things:
+## Test analysis:
 
 - If row is long and you change **a symbol / few symbols**, it gives you this <br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
 
@@ -100,29 +100,11 @@ hashRow(string):
     d9fef4261b3f6e2b6d9fe1ab3ee2b6de52d9fe1b3f61ab3e1b84ad9fef4261b3
     ```
 
-## ~~Problems:~~
-
-### SOLVED
-
-- If row gets too long and the beggining words are the same, hash becomes the same with all other rows that have the same beggining<br>
-
-    ### Input:
-    
-    ```console
-    lietuvos respubklikos aaa
-    lietuvos respubklikos ccc
-    ```
-    ### Output:
-    ```
-    467ac4485941e954bb344c5a54d016486ff4b0c36d61460e826e56e6b7607042
-    467ac4485941e954bb344c5a54d016486ff4b0c36d61460e826e56e6b7607042
-    ```
-
-## To Do:
-
-- ~~Create an **Input class.**~~
-- ~~Implement reading from a file.~~
-- ~~Function to convert **decimal** values into **Hexadecimal** values.~~
-- ~~Convert each row's text symbol into **ASCII** value.~~
-- ~~...~~
-- ~~**Improve/upgrade** hash function.~~
+## Conclusion
+- After doing all the tests, I couldn't find any collisions;
+- The complexity of the hash function is linear O(n);
+```console
+Time taken to hash 25 000 rows of length 10: 0.3635s.
+Time taken to hash 50 000 rows of length 10: 0.753983.
+```
+- The average avalanche effect is ~41%.<br> (According to [geeksforgeeks](https://www.geeksforgeeks.org/avalanche-effect-in-cryptography/) a good hash function satisfies avalanche effect when the similarity is < 50%)
