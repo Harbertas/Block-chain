@@ -10,7 +10,7 @@ decToHex(string):
 		dec_num = (int)it * sum^2 * string.size()^4
 		hex[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}
 		while(dec_num > 0)
-			r = dec_num % 16;
+			r = dec_num % 16
 			hexdec_num = hex[r] + hexdec_num
 			dec_num = dec_num / 16
 	return hexdec_num
@@ -22,7 +22,7 @@ hashRow(string):
 			hashedRow = decToHex(hashedRow)
 		else
 			hashedRow.resize(64)
-			break;
+			break
 
 ```
 
@@ -49,7 +49,7 @@ hashRow(string):
 
 ## Test analysis:
 
-- If row is long and you change **a symbol / few symbols**, it gives you this <br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
+- If row is long and you change **a symbol / few symbols**<br> **(simply simply simply -> SIMPLY SIMPLY SIMPLY)**<br>
 
     ### Input:
     
@@ -66,7 +66,7 @@ hashRow(string):
     7de8eab7e48abcdf2aa755cab494ca35056a78f04ab98f6abe870ac1d7cab494
     ```
 
-- If row is **short and you change a symbol**, it gives you this<br>
+- If row is **short and you change a symbol**<br>
 
      ### Input:
 
@@ -84,7 +84,7 @@ hashRow(string):
      1faa122e5c3f54824d59414551faa124d5924d591f056409fa1faa12240522e5
      ```
 
-- **Single symbol / character** gives you this
+- **Single symbol / character**
 
     ### Input:
 
