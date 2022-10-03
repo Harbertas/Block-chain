@@ -117,7 +117,28 @@ Time taken to hash 50 000 rows of length 10: 0.753983.
  
  ![image](https://user-images.githubusercontent.com/93277255/193537617-96c4a2dd-fbb4-4f45-954a-0833f1bdb7dc.png)
  
+|     |	 SHA-256  | "My hash" |
+| --- | --------- | --------- |
+|   2 |	0.0000112 | 0.0000429 |
+|   4 |	0.0000192 | 0.0000683 |
+|   8 |	0.0000337 | 0.000143  |
+|  16 |	0.0000626 | 0.0003718 |
+|  32 |	0.0001165 | 0.0007935 |
+|  64 |	0.0002254 | 0.0016706 |
+| 128 |	0.0004453 | 0.0045257 |
+| 256 |	0.0008947 | 0.0107233 |
+| 512 |	0.0019355 | 0.0233524 |
+| 789 |	0.0029294 | 0.035413  |
+ 
  - Here is a graphical representation of **SHA-256** AND **My hash** functions similarities, when hashing 100 000 pairs of rows, which each length varies from 2 to 1 000 symbols
  
  ![image](https://user-images.githubusercontent.com/93277255/193538884-9db2e0bb-c938-45c1-9277-9077af081cb0.png)
-
+ 
+|           | SHA-256 |  "My hash" |
+| --------- | ------- | ---------- |	    
+|  Hex, min |  0.00%  |	   0.00%   |
+|  Hex, avg |  6.27%  |	  41.33%   |
+|  Hex, max | 23.44%  |	  71.88%   |
+| Bits, min | 36.33%  |	  39.84%   |
+| Bits, avg | 50.03%  |	  70.50%   |
+| Bits, max | 62.50%  |   89.06%   |
