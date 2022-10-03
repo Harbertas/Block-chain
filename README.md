@@ -31,7 +31,7 @@ hashRow(string):
 - Time taken to hash [konstitucija.txt](https://www.dropbox.com/s/ce83ry9a4d9642z/konstitucija.txt?dl=0) (789 rows) : 0.033748s.
 - After hashing 25 000 rows, which length were 10, 100, 500, 1 000 random symbols, no hashed rows were the same, thus I can say that the hash function is resistant to collision.
 
-- To hash 100 000 rows, which each length varies from 2 to 1 000 symbols, it took **25.3471s**.<br> **Minimum, Average, Maximum** HEXADECIMAL similarities were:
+- To hash 100 000 pairs of rows, which each length varies from 2 to 1 000 symbols, it took **25.3471s**.<br> **Minimum, Average, Maximum** HEXADECIMAL similarities were:
 
     ```console
     minimum similarity: 0%
@@ -108,3 +108,16 @@ Time taken to hash 25 000 rows of length 10: 0.3635s.
 Time taken to hash 50 000 rows of length 10: 0.753983.
 ```
 - The average avalanche effect is ~41%.<br> (According to [geeksforgeeks](https://www.geeksforgeeks.org/avalanche-effect-in-cryptography/) a good hash function satisfies avalanche effect when the similarity is < 50%)
+
+## My hash function comparison to [SHA-256](http://www.zedwood.com/article/cpp-sha256-function)
+
+ ## Efficiency analysis
+ 
+ - Here is a graphical representation of time taken to hash konstitucija.txt using **my hash** and **SHA-256** functions
+ 
+ ![image](https://user-images.githubusercontent.com/93277255/193537617-96c4a2dd-fbb4-4f45-954a-0833f1bdb7dc.png)
+ 
+ - Here is a graphical representation of **SHA-256** AND **My hash** functions similarities, when hashing 100 000 pairs of rows, which each length varies from 2 to 1 000 symbols
+ 
+ ![image](https://user-images.githubusercontent.com/93277255/193538884-9db2e0bb-c938-45c1-9277-9077af081cb0.png)
+
