@@ -142,3 +142,28 @@ Time taken to hash 50 000 rows of length 10: 0.753983.
 | Bits, min | 36.33%  |	  39.84%   |
 | Bits, avg | 50.03%  |	  70.50%   |
 | Bits, max | 62.50%  |   89.06%   |
+
+## Hashing with salt analysis
+
+- Salt is a randomly generated string of characters of size 14.
+- Each input has a different salt value.
+
+   ### Input:
+   
+    ```console
+    hubertas
+    hubertas
+    ```
+    
+    ### Output:
+    
+    ```console
+    4231e4a77d3e5f84048d488e849d4a3dbc94931b1f2f91e8d621bbd1f2f91e8d
+    3db36456903a23a3beb043a1a44d1e398b84439c20a141d1181ed9e20a1421d0
+    ```
+    
+- Similarity between these 2 hashes+salt is **14.0625%**
+
+## Conclusion
+
+ - The same input hashed with different salt values outputs different hash.
