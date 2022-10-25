@@ -103,6 +103,18 @@ string hexToBin(string hexdec)
     return binary;
 }
 
+string generateSalt()
+{
+    stringstream saltBuff;
+    using hrClock = std::chrono::high_resolution_clock;
+    std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> rnd(32, 126);
+    
+    for (int i = 0; i < 14; i++)
+        saltBuff << rnd(mt);
+    return saltBuff.str();
+}
+
 void generate(int size, int length) {
     using hrClock = std::chrono::high_resolution_clock;
     std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
@@ -179,6 +191,28 @@ void generate(int size) {
     buffer.str("");
     buffer.clear();
     rf.close();
+}
+
+Input::Input(const Input& old_obj) 
+{
+    this->row = old_obj.row;
+    this->hashedRow = old_obj.hashedRow;
+    this->words = old_obj.words;
+    this->hashedWords = old_obj.hashedWords;
+}
+
+Input& Input::operator=(const Input& other)
+{
+    words.clear();
+    hashedRow.clear();
+    if (this != &other) //protect against invalid self-assignment
+    {
+        this->row = other.row;
+        this->hashedRow = other.hashedRow;
+        this->words = other.words;
+        this->hashedWords = other.hashedWords;
+    }
+    return *this;
 }
 
 std::ifstream Input::read(vector<Input>& data, double& timeTaken)
@@ -268,8 +302,10 @@ string Input::decToHex(string row)
     {
         sum += (int)*it;
     }
+    ////////
     for (auto it = row.end() - 1; it >= row.begin(); it--)
     {
+        if (hexdec_num.length() > 63) break;
         //cout << "pradzia " << *word.begin() << endl;
         //cout << "galas " << *(word.end()-1) << endl;
         //cout << "itterator " << *it << endl;
@@ -322,6 +358,36 @@ void Input::hashRow(string row) {
         {
             hashedRow.resize(64);
             setHashedRow(getHashedRow());
+            break;
+        }
+    }
+}
+
+void Input::hashRowSalt(string row) {
+    hashedRowSalt = decToHex(generateSalt() + getRow());
+    while (true) {
+        if (hashedRow.length() < 64) {
+            setHashedRowSalt(decToHex(getHashedRowSalt()));
+        }
+        else
+        {
+            hashedRowSalt.resize(64);
+            setHashedRowSalt(getHashedRowSalt());
+            break;
+        }
+    }
+}
+
+void Input::hashRowSalt() {
+    hashedRowSalt = decToHex(row + generateSalt());
+    while (true) {
+        if (hashedRow.length() < 64) {
+            setHashedRowSalt(decToHex(getHashedRowSalt()));
+        }
+        else
+        {
+            hashedRowSalt.resize(64);
+            setHashedRowSalt(getHashedRowSalt());
             break;
         }
     }
