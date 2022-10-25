@@ -1,6 +1,62 @@
 # A github repository for the Block-chain course
 
-## Simplified Block-Chain technology <i>v0.2.1</i>
+# Simplified Block-Chain technology <i>v0.2.1</i>
+
+## Improved Hash function pseudo code
+
+```c++
+decToHex(string):
+	for(it : string)
+		sum = sum + (int)it
+	for(it : string)
+		if(hexdec_num.length() > 63)
+			break
+		dec_num = (int)it * sum^2 * string.size()^4
+		hex[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'}
+		while(dec_num > 0)
+			r = dec_num % 16
+			hexdec_num = hex[r] + hexdec_num
+			dec_num = dec_num / 16
+	return hexdec_num
+
+hashRow(string):
+	hashedRow = decToHex(string)
+	while(true)
+		if(hashedRow.length() < 64)
+			hashedRow = decToHex(hashedRow)
+		else
+			hashedRow.resize(64)
+			break
+```
+
+## Efficiency analysis
+
+- In the **previous** version, it took the hash function **25.3471s** to hash 100 000 pairs of rows, where each pair's length varies from 2 to 1 000 symbols.
+- In the **improved** version, to hash the same file, the hash function only needs **0.351784s**.
+- P. S. <br>
+  All the other qualities were kept the same (similarity % on bits and hexes, avalanche effect, algorithm complexity, etc.)
+![image](https://user-images.githubusercontent.com/93277255/197746844-12e46c06-2e90-4173-8845-8730f613eab0.png)
+
+|        | Improved hash  |  Old hash |
+| ------ | -------------- | --------- |
+|   2    |	0.0000116 | 0.001514  |
+|   4    |	0.00002   | 0.0025493 |
+|   8    |	0.0000354 | 0.0028545 |
+|  16    |	0.0000654 | 0.0060378 |
+|  32    |	0.0001199 | 0.0114593 |
+|  64    |	0.0002307 | 0.0231379 |
+| 128    |	0.0004538 | 0.0476673 |
+| 256    |	0.000891  | 0.0823052 |
+| 512    |	0.0018034 | 0.146847  |
+| 1024   |	0.0036141 | 0.282716  |
+| 2048   |      0.0072161 | 0.547704  |
+| 4096   |      0.0143771 | 1.0614    | 
+| 8192   |      0.0288106 | 2.09799   |
+| 16384  |      0.0575573 | 4.16798   |
+| 32768  |      0.114593  | 8.31651   |
+| 65536  |      0.230316  | 16.5918   |
+| 100000 |	0.351784  | 25.3337   |
+# Hash function  <i>v0.1</i>
 
 ## Hash function pseudo code
 
