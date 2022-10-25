@@ -1,5 +1,7 @@
 # A github repository for the Block-chain course
 
+## Simplified Block-Chain technology <i>v0.2.1</i>
+
 ## Hash function pseudo code
 
 ```c++
