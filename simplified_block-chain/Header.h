@@ -13,6 +13,8 @@
 #include <filesystem>
 #include <random>
 #include <unordered_map>
+#include "stdint.h"
+#include "./SHA-256/sha256.h"
 
 using std::cout;
 using std::cin;
