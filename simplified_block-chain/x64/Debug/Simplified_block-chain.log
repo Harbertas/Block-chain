@@ -1,9 +1,0 @@
-﻿  Source.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-D:\Block-chain\simplified_block-chain\Input.h(27,35): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  block.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-D:\Block-chain\simplified_block-chain\Input.h(27,35): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
-Source.obj : error LNK2019: unresolved external symbol "class std::basic_ostream<char,struct std::char_traits<char> > & __cdecl operator<<(class std::basic_ostream<char,struct std::char_traits<char> > &,class transaction &)" (??6@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AEAV01@AEAVtransaction@@@Z) referenced in function "public: void __cdecl block::showTransactions(void)" (?showTransactions@block@@QEAAXXZ)
-D:\Block-chain\simplified_block-chain\x64\Debug\Simplified_block-chain.exe : fatal error LNK1120: 1 unresolved externals
