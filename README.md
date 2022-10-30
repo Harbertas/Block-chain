@@ -2,7 +2,7 @@
 
 # Simplified Block-Chain technology <i>v0.2.1</i>
 
-## Improved Hash function pseudo code
+## (IRRELEVANT SINCE NOT USING) Improved Hash function pseudo code
 
 ```c++
 decToHex(string):
