@@ -11,7 +11,7 @@
 > ./main
 ```
 
-## Program commands:
+## Available commands while using:
 
 ```console
 ----------------------------------------
