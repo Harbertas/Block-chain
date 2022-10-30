@@ -2,6 +2,29 @@
 
 # Simplified Block-Chain technology <i>v0.2.1</i>
 
+## Downloading and using:
+
+```console
+> git clone https://github.com/Harbertas/Block-chain.git
+> go to the folder where you saved the cloned repository
+> make
+> ./main
+```
+
+## Program commands:
+
+```console
+----------------------------------------
+Here are the list of available commands:
+----------------------------------------
+mineGenesis      -> To mine GENESIS block
+mineAllBlocks    -> To mine all possible blocks (untill there are unspent transactions)
+showBlockInfo    -> To show specific block info
+showTransactions -> To show all the transactions in the block
+0                -> To finish running the program
+----------------------------------------
+```
+
 ## (IRRELEVANT SINCE NOT USING) Improved Hash function pseudo code
 
 ```c++
