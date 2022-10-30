@@ -114,9 +114,8 @@ void SHA256::final(unsigned char* digest)
     }
 }
 
-std::string sha256(std::string input, double& timeTaken)
+std::string sha256(std::string input)
 {
-    auto start = std::chrono::high_resolution_clock::now();
 
     unsigned char digest[SHA256::DIGEST_SIZE];
     memset(digest, 0, SHA256::DIGEST_SIZE);
@@ -131,9 +130,6 @@ std::string sha256(std::string input, double& timeTaken)
     for (int i = 0; i < SHA256::DIGEST_SIZE; i++)
         sprintf(buf + i * 2, "%02x", digest[i]);
 
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = end - start; // Skirtumas (s)
-    timeTaken += diff.count();
 
     return std::string(buf);
 }
