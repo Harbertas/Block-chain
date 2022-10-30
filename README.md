@@ -2,7 +2,7 @@
 
 # Simplified Block-Chain technology <i>v0.2.1</i>
 
-## Downloading and using:
+## Downloading and starting:
 
 ```console
 > git clone https://github.com/Harbertas/Block-chain.git
@@ -11,7 +11,7 @@
 > ./main
 ```
 
-## Available commands while using:
+## Available commands:
 
 ```console
 ----------------------------------------
