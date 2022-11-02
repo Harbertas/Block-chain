@@ -151,6 +151,7 @@ void block::showBlockInfo()
 	cout << "Time taken to mine: " << header::timeStamp << "s" << endl;
 	cout << "Version: " << header::version << endl;
 	cout << "Nonce: " << header::nonce << endl;
+	cout << "Txs: " << body::tx.size() << endl;
 	cout << "Merkle root: " << header::merkelRootHash << endl;
 	cout << "Previous block hash: " << header::prev_block_hash << endl;
 	//showTransactions();
@@ -244,6 +245,11 @@ void blockChain::mineGenesis()
 		b.setTimeStamp(diff.count());
 		b.addTransaction(tx);
 		add(b);
+		cout << "Successfully mined GENESIS block!" << endl;
+	}
+	else 
+	{
+		cout << "Genesis Block already exists!" << endl;
 	}
 }
 
@@ -299,6 +305,7 @@ void blockChain::mineAllBlocks()
 
 			}
 			printUsers(users, 1);
+			cout << "Successfully mined all blocks!" << endl;
 		}
 		else
 			cout << "Mine genesis block first (use mineGenesis)" << endl;

@@ -55,23 +55,22 @@ int main()
 			cout << std::left << std::setw(16) << "mineAllBlocks" << " -> To mine all possible blocks (untill there are unspent transactions)" << endl;
 			cout << std::left << std::setw(16) << "showBlockInfo" << " -> To show specific block info" << endl;
 			cout << std::left << std::setw(16) << "showTransactions" << " -> To show all the transactions in the block" << endl;
+			cout << std::left << std::setw(16) << "blockChainSize" << " -> To show current block-chain size (how many blocks are in the block-chain)" << endl;
 			cout << std::left << std::setw(16) << "0" << " -> To finish running the program" << endl;
 			cout << "----------------------------------------" << endl;
 			cin >> input;
 		}
 		else if (input == "mineAllBlocks") 
 		{
-			bc.mineGenesis();
+			
 			bc.mineAllBlocks();
 			cout << endl;
-			cout << "Successfully mined all blocks!" << endl;
 			cin >> input;
 		}
 		else if(input == "mineGenesis")
 		{
 			bc.mineGenesis();
 			bc.showBlockInfo(0);
-			cout << "Successfully mined GENESIS block!" << endl;
 			cin >> input;
 		}
 		else if (input == "blockChainSize")
