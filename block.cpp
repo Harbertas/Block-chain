@@ -211,6 +211,9 @@ void blockChain::updateBalance(vector<transaction>& spent_transactions)
 	{
 		for (auto& st : spent_transactions)
 		{
+			// TODO: verify transacation authenticity here
+			// TODO: verify transacation balance
+			// If sending amount <= sender balance -> OK
 			if (st.getSum() <= us.getBalance())
 			{
 				if (us.getPublicKey() == st.getSender())
@@ -276,13 +279,13 @@ void blockChain::mineAllBlocks()
 
 				while (true)
 				{
+					// TODO: decentralized mining
 					if (strncmp(headerHash.c_str(), "0000", 4) == 0)
 					{
 						newBlock.setHash(headerHash);
 						newBlock.setPrevBlockHash(prevBlock.getHash());
 						newBlock.setHeight(chainSize);
 						newBlock.setNonce(nonceG);
-						newBlock.setMerkelRootHash(merkelHash(spent_transactions));
 						break;
 					}
 					else
@@ -296,6 +299,7 @@ void blockChain::mineAllBlocks()
 				newBlock.setTimeStamp(diff.count());
 
 				updateBalance(spent_transactions);
+				newBlock.setMerkelRootHash(merkelHash(spent_transactions));
 				newBlock.setTransaction(spent_transactions);
 
 				cout << endl;
