@@ -55,6 +55,7 @@ class header
 		string prev_block_hash;
 		string version = "0.2.1";
 		uint64_t nonce;
+		uint64_t diffTarget = 4;
 	public:
 		virtual void setTimeStamp(double timeStamp_) = 0;
 		virtual void setHash(string h) = 0;
@@ -62,6 +63,7 @@ class header
 		virtual void setPrevBlockHash(string p) = 0;
 		virtual void setMerkelRootHash(string p) = 0;
 		virtual void setHeight(int h) = 0;
+		virtual void setDiffTarget(int h) = 0;
 };
 
 class body
@@ -92,6 +94,7 @@ class block : public header, public body, public transaction
 		const string getMerkelRootHash() { return this->merkelRootHash; };
 		const uint64_t getNonce() { return this->nonce; };
 		const string getHash() { return this->hash; };
+		const uint64_t getDiffTarget() { return this->diffTarget; };
 		void setTransaction(vector<transaction> transactions) { this->tx = transactions; };
 		void setTimeStamp(double timeStamp_) { this->timeStamp = timeStamp_; };
 		void setPrevBlockHash(string p) { this->prev_block_hash = p; };
@@ -99,6 +102,7 @@ class block : public header, public body, public transaction
 		void setNonce(uint64_t n) { this->nonce = n; };
 		void setMerkelRootHash(string m) { this->merkelRootHash = m; };
 		void setHeight(int h) { this->height = h; };
+		void setDiffTarget(int t) { this->diffTarget = t; };
 		void showTransactions();
 		void showBlockInfo();
 };
@@ -114,12 +118,15 @@ class blockChain : protected block
 		const int getSize() { return bc.size(); };
 		void mineGenesis();
 		void mineAllBlocks();
-		vector<transaction> chooseTransactions();
+		vector<transaction> deleteTransactionsFromPool(vector<transaction>& transactions);
+		vector<transaction> chooseTransactionsFromPool();
+		void checkTransactions(vector<transaction>& spent_transactions);
 		void updateBalance(vector<transaction>& spent_transactions);
 		void add(block b) { bc.push_back(b); };
-		void showBlockInfo(int i) { if (i < bc.size() && i >= 0) bc.at(i).showBlockInfo(); else cout << "Block '" << i << "' hasn't been found yet. (try running 'mineAllBlocks')" << endl; };
-		void showTransactions(int i) { if (i < bc.size() && i >= 0) bc.at(i).showTransactions(); else cout << "Block '" << i << "' hasn't been found yet. (try running 'mineAllBlocks')" << endl; };
+		void showBlockInfo(int i) { if (i < bc.size() && i >= 0) bc.at(i).showBlockInfo(); else cout << "Block '" << i << "' hasn't been found yet. (try running 'mineBlocks')" << endl; };
+		void showTransactions(int i) { if (i < bc.size() && i >= 0) bc.at(i).showTransactions(); else cout << "Block '" << i << "' hasn't been found yet. (try running 'mineBlocks')" << endl; };
 		const string getBlockHash(int i) { return bc.at(i).getHash(); };
+		user* getUser(string public_ip);
 };
 
 string merkelHash(vector<transaction>& transacations);
