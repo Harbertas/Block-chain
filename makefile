@@ -1,2 +1,5 @@
+files:= main
 main:
-	g++ -o main SHA-256/*.cpp *.cpp -O3
+	g++ -o $(files) SHA-256/*.cpp *.cpp -O3
+clean:
+	rm $(files)

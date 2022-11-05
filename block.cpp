@@ -294,6 +294,7 @@ user* blockChain::getUser(string public_ip)
 		if (us.getPublicKey() == public_ip)
 			return &us;
 	}
+	return NULL;
 }
 
 void blockChain::checkTransactions(vector<transaction>& spent_transactions)
@@ -405,7 +406,6 @@ void blockChain::mineAllBlocks()
 						//TO SHOW BLOCK INFO -> newBlock.showBlockInfo();
 						bc.push_back(newBlock);
 						cout << "Successfully mined '" << chainSize << "' block!\n" << endl;
-						newBlock.~block();
 						break;
 					}
 					else
