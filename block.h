@@ -103,6 +103,7 @@ class block : public header, public body, public transaction
 		void setMerkelRootHash(string m) { this->merkelRootHash = m; };
 		void setHeight(int h) { this->height = h; };
 		void setDiffTarget(int t) { this->diffTarget = t; };
+		string computeMerkleRoot(vector<transaction> transactions);
 		void showTransactions();
 		void showBlockInfo();
 };
@@ -118,7 +119,7 @@ class blockChain : protected block
 		const int getSize() { return bc.size(); };
 		void mineGenesis();
 		void mineAllBlocks();
-		vector<transaction> deleteTransactionsFromPool(vector<transaction>& transactions);
+		void deleteTransactionsFromPool(vector<transaction>& transactions);
 		vector<transaction> chooseTransactionsFromPool();
 		void checkTransactions(vector<transaction>& spent_transactions);
 		void updateBalance(vector<transaction>& spent_transactions);

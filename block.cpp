@@ -156,6 +156,45 @@ void block::showBlockInfo()
 	cout << "Previous block hash: " << header::prev_block_hash << endl;
 }
 
+string block::computeMerkleRoot(vector<transaction> transactions) 
+{
+	int size = transactions.size();
+	if (size == 0)
+		return sha256("");
+	vector<transaction> tmp;
+	if (size % 2 == 0) 
+	{
+		tmp.reserve(size / 2);
+		for (int tx_index = 0; tx_index < size / 2; tx_index++) 
+		{
+			string hashedValue;
+			transaction tx;
+			hashedValue = transactions.at(2 * tx_index).getTransactionID() + transactions.at(2 * tx_index + 1).getTransactionID();
+			tx.setTransactionID(sha256(hashedValue));
+			tmp.push_back(tx);
+		}
+	}
+	else 
+	{
+		transaction tx;
+		string hashedValue;
+		tmp.reserve((size + 1) / 2);
+		for (int tx_index = 0; tx_index < size / 2; tx_index++) 
+		{
+			hashedValue = transactions.at(2 * tx_index).getTransactionID() + transactions.at(2 * tx_index + 1).getTransactionID();
+			tx.setTransactionID(sha256(hashedValue));
+			tmp.push_back(tx);
+		}
+		tx.setTransactionID(sha256(transactions.back().getTransactionID()));
+		tmp.push_back(tx);
+	}
+
+	if (tmp.size() == 1)
+		return tmp[0].getTransactionID();
+	else
+		return computeMerkleRoot(tmp);
+}
+
 /**DESTRUCTOR*/
 block::~block()
 {
@@ -179,7 +218,7 @@ blockChain::~blockChain()
 	this->users.clear();
 }
 
-vector<transaction> blockChain::deleteTransactionsFromPool(vector<transaction>& transactions)
+void blockChain::deleteTransactionsFromPool(vector<transaction>& transactions)
 {
 	transaction save;
 	for (auto& tx2 : transactions)
@@ -362,7 +401,7 @@ void blockChain::mineAllBlocks()
 						deleteTransactionsFromPool(spent_transactions);
 						checkTransactions(spent_transactions);
 						newBlock.setTransaction(spent_transactions);
-						newBlock.setMerkelRootHash(merkelHash(spent_transactions));
+						newBlock.setMerkelRootHash(computeMerkleRoot(spent_transactions));
 						//TO SHOW BLOCK INFO -> newBlock.showBlockInfo();
 						bc.push_back(newBlock);
 						cout << "Successfully mined '" << chainSize << "' block!\n" << endl;

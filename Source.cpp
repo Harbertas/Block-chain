@@ -7,6 +7,24 @@
 
 int main()
 {
+	//block test;
+	//vector<transaction> tx;
+	//transaction ts;
+	//string sender = "hubertas1";
+	//string receiver = "hubertas2";
+	//double sum = 10;
+	//ts.setSender(sender);
+	//ts.setReceiver(receiver);
+	//ts.setSum(sum);
+	//ts.setTransactionID(sha256(sender + receiver + to_string(sum)));
+	//tx.push_back(ts);
+	//sender = "haroldas1";
+	//receiver = "haroldas2";
+	//sum = 20;
+	//ts.setTransactionID(sha256(sender + receiver + to_string(sum)));
+	//tx.push_back(ts);
+	//cout << test.computeMerkleRoot(tx) << endl;
+	//cout << sha256(tx.at(0).getTransactionID() + tx.at(1).getTransactionID()) << endl;
 	//block* node = NULL;
 	//node = new block;
 	//tx.setTransactionID("16554");
