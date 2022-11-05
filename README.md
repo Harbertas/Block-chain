@@ -15,13 +15,14 @@
 
 ```console
 ----------------------------------------
-Here are the list of available commands:
+Here are the list of all available commands:
 ----------------------------------------
-mineGenesis      -> To mine GENESIS block
-mineAllBlocks    -> To mine all possible blocks (untill there are unspent transactions)
-showBlockInfo    -> To show specific block info
-showTransactions -> To show all the transactions in the block
-0                -> To finish running the program
+mineGenesis           -> To mine GENESIS block
+mineBlocks            -> To mine all possible blocks (untill there are unspent transactions)
+showBlockInfo         -> To show specific block info
+showBlockTx           -> To show all the transactions in the block
+showBlockChainSize    -> To show current block-chain size (how many blocks are in the block-chain)
+0                     -> To finish running the program
 ----------------------------------------
 ```
 
