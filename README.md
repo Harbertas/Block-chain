@@ -9,6 +9,8 @@
 > go to the folder where you saved the cloned repository
 > make
 > ./main
+> ...
+> make clean
 ```
 
 ## Available commands:
